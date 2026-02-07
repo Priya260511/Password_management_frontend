@@ -9,24 +9,37 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
+    steps:
+      # 1️⃣ Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2️⃣ Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - run: npm install
-      - run: npm run build
+      # 3️⃣ Install dependencies
+      - name: Install dependencies
+        run: npm install
 
-      # Optional Sonar scan for JS/TS
-      - name: Sonar Scan
+      # 4️⃣ SonarCloud scan (optional)
+      - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v1
         with:
           projectBaseDir: .
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_PROJECT_KEY: Priya260511_Password_management_frontend
+          SONAR_ORGANIZATION: priya260511
 
+      # 5️⃣ Build React app
+      - name: Build frontend
+        run: npm run build
+
+      # 6️⃣ Deploy to Vercel
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v20
         with:
