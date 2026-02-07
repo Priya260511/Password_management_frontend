@@ -25,7 +25,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # 4️⃣ SonarCloud scan (optional)
+      # 4️⃣ SonarCloud scan (JS/React)
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v1
         with:
@@ -35,7 +35,7 @@ jobs:
           SONAR_PROJECT_KEY: Priya260511_Password_management_frontend
           SONAR_ORGANIZATION: priya260511
 
-      # 5️⃣ Build React app
+      # 5️⃣ Build frontend
       - name: Build frontend
         run: npm run build
 
