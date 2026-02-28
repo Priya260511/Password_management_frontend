@@ -45,6 +45,8 @@ Deployment
 >Frontend deployed using Vercel.
 >Connected to live backend APIs for full system functionality.
 <img width="1920" height="1080" alt="Screenshot 2026-02-07 190038" src="https://github.com/user-attachments/assets/910d69d8-8afe-43e0-a388-d2c59e831e66" />
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/35063c4f-1d48-42c5-9462-a56377e61efa" />
+
 Challenges & Learnings 
 >Handling API integration with asynchronous calls.
 >Managing state and UI updates in React.
