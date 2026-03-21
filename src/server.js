@@ -3,6 +3,9 @@ const path = require('path');
 
 const app = express();
 
+// 🔒 Hide Express version (Sonar fix)
+app.disable('x-powered-by');
+
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('*', (req, res) => {
