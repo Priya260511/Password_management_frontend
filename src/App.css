@@ -31,13 +31,31 @@ body {
     min-height: 100vh;
 }
 
+/* 🔥 Notification */
+.notification {
+    padding: 12px 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    font-weight: 600;
+    animation: fadeIn 0.3s ease;
+}
+
+.notification.success {
+    background-color: #28a745;
+}
+
+.notification.error {
+    background-color: #dc3545;
+}
+
 .header {
     background: white;
     padding: 30px;
     border-radius: 12px 12px 0 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    margin-bottom: 0;
 }
 
 .logo {
@@ -55,7 +73,7 @@ body {
 }
 
 .logo svg {
-    color:  #3F51B5;
+    color: #3F51B5;
 }
 
 .tagline {
@@ -143,10 +161,6 @@ input::placeholder {
     box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
 }
 
-.btn-primary:active {
-    transform: translateY(0);
-}
-
 .btn-danger {
     background: #ff6b6b;
     color: white;
@@ -170,17 +184,6 @@ input::placeholder {
     background: #3db5ac;
 }
 
-.btn-toggle {
-    background: #f0f0f0;
-    color: #666;
-    padding: 6px 10px;
-    font-size: 12px;
-}
-
-.btn-toggle:hover {
-    background: #e0e0e0;
-}
-
 .credentials-list {
     display: flex;
     flex-direction: column;
@@ -192,27 +195,19 @@ input::placeholder {
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     padding: 20px;
-    transition: all 0.3s ease;
-}
-
-.credential-item:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    border-color: #667eea;
 }
 
 .credential-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     margin-bottom: 15px;
-    padding-bottom: 15px;
     border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
 }
 
 .credential-url {
     font-weight: 600;
     color: #667eea;
-    word-break: break-all;
 }
 
 .credential-details {
@@ -224,21 +219,15 @@ input::placeholder {
 .detail-row {
     display: flex;
     flex-direction: column;
-    gap: 5px;
 }
 
 .detail-label {
     font-size: 12px;
-    font-weight: 600;
     color: #999;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 .detail-value {
     font-size: 14px;
-    color: #333;
-    word-break: break-all;
     font-weight: 500;
 }
 
@@ -246,18 +235,6 @@ input::placeholder {
     display: flex;
     gap: 10px;
     margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px solid #e0e0e0;
-}
-
-.empty-state {
-    text-align: center;
-    padding: 40px 20px;
-    color: #999;
-}
-
-.empty-state.hidden {
-    display: none;
 }
 
 .footer {
@@ -266,130 +243,10 @@ input::placeholder {
     text-align: center;
     padding: 20px;
     border-radius: 0 0 12px 12px;
-    font-size: 14px;
 }
 
 @media (max-width: 768px) {
     .content {
         grid-template-columns: 1fr;
-        padding: 25px;
-        gap: 30px;
     }
-
-    .header {
-        padding: 20px;
-    }
-
-    .logo h1 {
-        font-size: 24px;
-    }
-
-    .credential-details {
-        grid-template-columns: 1fr;
-    }
-
-    .credential-actions {
-        flex-wrap: wrap;
-    }
-}
-
-/* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    animation: fadeIn 0.3s ease;
-}
-
-.modal.show {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.modal-content {
-    background-color: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    width: 90%;
-    max-width: 450px;
-    animation: slideIn 0.3s ease;
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid #e0e0e0;
-}
-
-.modal-header h2 {
-    font-size: 20px;
-    color: #333;
-    margin: 0;
-}
-
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 28px;
-    color: #999;
-    cursor: pointer;
-    padding: 0;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.close-btn:hover {
-    color: #333;
-}
-
-.modal-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 25px;
-}
-
-.btn-secondary {
-    background: #f0f0f0;
-    color: #666;
-    flex: 1;
-}
-
-.btn-secondary:hover {
-    background: #e0e0e0;
-    transform: none;
-    box-shadow: none;
 }
