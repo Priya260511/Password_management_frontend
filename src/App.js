@@ -6,21 +6,22 @@ import EditModal from './components/EditModal';
 import Footer from './components/Footer';
 import './App.css';
 
-const api = "https://password-management-backend-h3yy.onrender.com/api/credentials";
-//sonar test
+const api = "http://localhost:8080/api/credentials";
+
 function App() {
   const [credentials, setCredentials] = useState([]);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editData, setEditData] = useState({ url: '', username: '', password: '' });
 
-  // Load credentials on mount
+  // ✅ NEW: Notification state
+  const [notification, setNotification] = useState({ message: "", type: "" });
+
   useEffect(() => {
     loadData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Load all credentials
   const loadData = async () => {
     try {
       const response = await fetch(api);
@@ -33,7 +34,6 @@ function App() {
     }
   };
 
-  // Create new credential
   const handleAddCredential = async (data) => {
     try {
       const response = await fetch(api, {
@@ -54,7 +54,6 @@ function App() {
     }
   };
 
-  // Open edit modal
   const handleOpenEditModal = (credential) => {
     setEditingId(credential.id);
     setEditData({
@@ -65,14 +64,12 @@ function App() {
     setShowEditModal(true);
   };
 
-  // Close edit modal
   const handleCloseEditModal = () => {
     setShowEditModal(false);
     setEditingId(null);
     setEditData({ url: '', username: '', password: '' });
   };
 
-  // Update credential
   const handleUpdateCredential = async (data) => {
     try {
       const response = await fetch(`${api}/${editingId}`, {
@@ -94,9 +91,8 @@ function App() {
     }
   };
 
-  // Delete credential
   const handleDeleteCredential = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this credential?")) return;
+    if (!window.confirm("⚠️ This action cannot be undone. Delete this credential?")) return;
 
     try {
       const response = await fetch(`${api}/${id}`, { method: "DELETE" });
@@ -113,13 +109,26 @@ function App() {
     }
   };
 
+  
+  // ✅ UPDATED notification function
   const showNotification = (message, type) => {
-    console.log(`[${type.toUpperCase()}] ${message}`);
+    setNotification({ message, type });
+
+    setTimeout(() => {
+      setNotification({ message: "", type: "" });
+    }, 3000);
   };
 
   return (
     <div className="container">
       <Header />
+
+      {/* ✅ Notification UI */}
+      {notification.message && (
+        <div className={`notification ${notification.type}`}>
+          {notification.message}
+        </div>
+      )}
 
       <main className="content">
         <FormSection onAddCredential={handleAddCredential} />
