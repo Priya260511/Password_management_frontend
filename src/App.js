@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Header from './components/Header';
 import FormSection from './components/FormSection';
 import CredentialsSection from './components/CredentialsSection';
@@ -17,11 +17,8 @@ function App() {
 
   const [notification, setNotification] = useState({ message: "", type: "" });
 
-  useEffect(() => {
-    loadData();
-  }, []);
-
-  const loadData = async () => {
+  // ✅ FIX: useCallback added
+  const loadData = useCallback(async () => {
     try {
       const response = await fetch(api);
       if (!response.ok) throw new Error("Failed to fetch credentials");
@@ -31,7 +28,12 @@ function App() {
       console.error("Error loading data:", error);
       showNotification("Failed to load credentials", "error");
     }
-  };
+  }, []);
+
+  // ✅ FIX: dependency added
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   const handleAddCredential = async (data) => {
     try {
