@@ -6,23 +6,19 @@ import EditModal from './components/EditModal';
 import Footer from './components/Footer';
 import './App.css';
 
-// feature-frontend
-const api = "http://localhost:8080/api/credentials";
+// ✅ FIXED: Only one API
 const api = "https://password-management-backend-h3yy.onrender.com/api/credentials";
-//sonar test
-//main
+
 function App() {
   const [credentials, setCredentials] = useState([]);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editData, setEditData] = useState({ url: '', username: '', password: '' });
 
-  // ✅ NEW: Notification state
   const [notification, setNotification] = useState({ message: "", type: "" });
 
   useEffect(() => {
     loadData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadData = async () => {
@@ -112,7 +108,6 @@ function App() {
     }
   };
 
-  // ✅ UPDATED notification function
   const showNotification = (message, type) => {
     setNotification({ message, type });
 
@@ -125,7 +120,6 @@ function App() {
     <div className="container">
       <Header />
 
-      {/* ✅ Notification UI */}
       {notification.message && (
         <div className={`notification ${notification.type}`}>
           {notification.message}
