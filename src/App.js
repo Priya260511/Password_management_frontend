@@ -109,6 +109,7 @@ function App() {
     }
   };
 
+  
   // ✅ UPDATED notification function
   const showNotification = (message, type) => {
     setNotification({ message, type });
